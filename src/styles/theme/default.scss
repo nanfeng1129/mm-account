@@ -1,0 +1,32 @@
+
+$main-font: Quicksand;
+
+:root{
+    --font-normal: #{$main-font}, -apple-system, BlinkMacSystemFont, 'Microsoft Yahei UI',
+    'Microsoft Yahei', 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
+    --border-radius: 3px;
+}
+
+:root[theme-mode=light]{
+    --bg-color-body: #fff;
+    --color-text-primary: rgba(0, 0, 0, .9);
+    --bg-color-button: #eeeeee;
+    --color-icon-sun-color: rgb(255, 189, 46);
+    --color-icon-moon-color: rgba(0, 0, 0, .26);
+    --bg-color-theme-switch: #eee;
+    --bg-color-theme-sun: #fff;
+    --bg-color-theme-moon: var(--bg-color-theme-switch);
+}
+
+:root[theme-mode=dark]{
+    --bg-color-body: #242424;
+    --color-text-primary: hsla(0,0%,100%,.9);
+    --bg-color-button: #4b4b4b;
+    --color-icon-sun-color: rgba(255, 255, 255, .22);
+    --color-icon-moon-color: rgb(255, 255, 255);
+    --bg-color-theme-switch: #383838;
+    --bg-color-theme-sun: var(--bg-color-theme-switch);
+    --bg-color-theme-moon: #4b4b4b;
+}
+

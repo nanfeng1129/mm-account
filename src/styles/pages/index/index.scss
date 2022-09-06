@@ -1,0 +1,41 @@
+
+.index-logo{
+    position: fixed;
+    top: 50px;
+    left: 50px;
+    cursor: pointer;
+}
+
+.index-theme-switch{
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    cursor: pointer;
+    display: flex;
+    overflow: hidden;
+    min-width: 80px;
+    width: 80px;
+    height: 40px;
+    padding: 2px;
+    box-sizing: border-box;
+    align-items: center;
+    border-radius: var(--border-radius);
+    justify-content: space-between;
+    background-color: var(--bg-color-theme-switch);
+    &-sun{
+        color: var(--color-icon-sun-color);
+        background-color: var(--bg-color-theme-sun);
+    }
+    &-moon{
+        color: var(--color-icon-moon-color);
+        background-color: var(--bg-color-theme-moon);
+    }
+    &-div{
+        width: 50%;
+        height: 28px;
+        padding: 3px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
