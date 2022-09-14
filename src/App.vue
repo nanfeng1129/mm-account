@@ -6,8 +6,9 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue';
+  import { onMounted } from 'vue';
   onMounted(() => {
-    document.documentElement.setAttribute('theme-mode', 'light');
+    document.documentElement.setAttribute('theme-mode', 'light')
+    document.documentElement.className = 'light'
   })
 </script>
