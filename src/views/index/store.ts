@@ -11,14 +11,18 @@ interface User {
 export const useModal = () => {
     const visible = ref(false)
 
-    const handleOk = (el: FormInstance | undefined, data: User, cb: Function, ..._arguments: any[]) =>{ 
-        cb(el, data);
-        console.log("查看下arguments", _arguments);
+    const changeVisible = (boo: boolean) => {
+        visible.value = boo
+    }
+
+    const handleOk = (el: FormInstance | undefined, data: User, cb: Function) =>{ 
+        cb(el, data)
     }
 
     return {
         visible,
         handleOk,
+        changeVisible
     }
 
 }

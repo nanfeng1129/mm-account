@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="index">
 
         <!-- <div class="index-logo">
             <LogoGithubIcon size="36px" class="index-logo-icon"/>
@@ -9,10 +9,10 @@
         <div class="index-right">
             <div class="index-theme-switch">
                 <div class="index-theme-switch-sun index-theme-switch-div" @click="changeThemeMode('light')">
-                    <SunIcon :width="20" :height="20"/>
+                    <SunIcon width="20px" height="20px"/>
                 </div>
                 <div class="index-theme-switch-moon index-theme-switch-div" @click="changeThemeMode('dark')">
-                    <MoonIcon :width="20" :height="20"/>
+                    <MoonIcon width="20px" height="20px"/>
                 </div>
                 
             </div>
@@ -22,24 +22,20 @@
                     <el-icon size="36px" @click="login">
                         <User />
                     </el-icon>
-                    <!-- <UserIcon size="36px" @click="login"/> -->
-                    <!-- <UserCircleIcon size="36px" @click=""/> -->
                 </div>
             </div>
         </div>
-
-        <el-button>
-            差不过事
-        </el-button>
         
-        <!-- <div>
-            <div>
-                <SunIcon />
+        <div class="index-left">
+            <div class="index-left-sun" v-show="isLight">
+                <SunIcon width="130px" height="130px" class="index-left-sun-icon"/>
             </div>
-            <div>
-                <MoonIcon />
+            <div class="index-left-moon" v-show="!isLight">
+                <MoonIcon width="130px" height="130px" class="index-left-moon-icon"/>
             </div>
-        </div> -->
+        </div>
+
+        <div class="index-sunshine" v-show="isLight"></div>
 
         <div class="index-main">
             <div class="index-main-text animate__animated animate__bounce">
@@ -70,7 +66,7 @@
             <template #footer>
                 <span class="dialog-footer">
                     <el-button @click="handleReset(loginForm)">重置</el-button>
-                    <el-button type="primary" @click="handleOk(loginForm, formData, onSubmit, 'lijw', '000000')">确认</el-button>
+                    <el-button type="primary" @click="handleOk(loginForm, formData, onSubmit)">确认</el-button>
                 </span>
             </template>
         </el-dialog>
@@ -89,23 +85,29 @@
 </template>
 
 <script lang="ts" setup>
-    import { nextTick } from 'vue'
+    import { nextTick, ref } from 'vue'
     import SunIcon from './conponents/SunIcon.vue'
     import MoonIcon from './conponents/MoonIcon.vue'
     import { useModal, useForm } from './store'
     import { User } from '@element-plus/icons-vue'
+    import { useRouter } from 'vue-router'
     // const buttonText = ref('深色模式')
 
-    const { visible, handleOk } = useModal()
+    const router = useRouter()
+
+    const { visible, handleOk, changeVisible } = useModal()
 
     const { formData, rules, loginForm, onSubmit, handleReset } = useForm()
 
     const login = () => {
-        visible.value = true
-        nextTick(() => {
-            handleReset(loginForm.value)
-        })
+        router.push("/myCenter")
+        // changeVisible(true)
+        // nextTick(() => {
+        //     handleReset(loginForm.value)
+        // })
     }
+
+    const isLight = ref(true)
 
     // const
 
@@ -113,9 +115,11 @@
         if(type === 'dark'){
             document.documentElement.setAttribute("theme-mode", 'dark')
             document.documentElement.className = 'dark'
+            isLight.value = false
         }else {
             document.documentElement.setAttribute("theme-mode", 'light')
             document.documentElement.className = 'light'
+            isLight.value = true
         }
     }
 
