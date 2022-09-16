@@ -10,7 +10,7 @@
 
 mm-account 主要用于记账功能，打算做响应式布局，但现在说这话还太早，先把主要功能实现出来，目前仍处于快速迭代中！
 
-目前门户主要用到的技术栈为 Vue3 + TypeScript + ElementPlus
+目前门户主要用到的技术栈为 Vue3 + TypeScript + Vite
 
 管理端打算复用 [mm-blog-manage](https://github.com/nanfeng1129/mm-blog-manage) 那一套，感觉没啥变化
 
