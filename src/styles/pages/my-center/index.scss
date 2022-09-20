@@ -1,0 +1,13 @@
+.my-center{
+    margin: 0px 10%;
+    &-report{
+        background-color: #99a9bf;
+        line-height: 200px;
+    }
+    &-container{
+        display: flex;
+        &-left{
+            width: 18%;
+        }
+    }
+}
