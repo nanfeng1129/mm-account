@@ -2,7 +2,7 @@ export const FORM_TYPE = {
     INPUT:'input',//输入框
     INPUT_SEARCH: 'inputSearch',  //查询会员编号
     SELECT:'select',//下拉框
-    SELECT_SEARCH: 'selectSearch', //搜索下拉框
+    SELECT_FILTER: 'selectFilter', //搜索下拉框
     SELECT_MULTIPLE:'multiple',//多选下拉框
     MONTH_PICKER:'monthPicker',//年月
     RANGE_PICKER:'rangePicker',//起始日期

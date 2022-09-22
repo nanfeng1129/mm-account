@@ -32,7 +32,3 @@
     import { routes } from '../../router/index'
 
 </script>
-
-<style lang="scss" scoped>
-
-</style>

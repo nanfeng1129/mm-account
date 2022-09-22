@@ -1,0 +1,42 @@
+.comm-search{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 10px 10px 0px 10px;
+    // justify-content: center;
+    // .search-button{
+    //     margin-right: 10px;
+    // }
+    &-div{
+        padding-right: 20px;
+    }
+    &-col{
+        width: 100%;
+        overflow: hidden;
+        margin-bottom: 10px;
+        display: block;
+        position: relative;
+        &-btn{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            // position: absolute;
+            // bottom: 0px;
+            &-item{
+                width: 30%;
+            }
+        }
+        &-select{
+            display: block!important;
+            // padding-right: 20px;
+            // width: 85%;
+        }
+        &-range{
+            width: 100%!important;
+            // display: block!important;
+            // padding-right: 20px;
+            // width: 85%;
+        }
+    }
+}
