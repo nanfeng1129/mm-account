@@ -2,6 +2,7 @@
     <div>
         <CommSearch
             :options-form="optionsForm"
+            :optionsBnForm="optionsBnForm"
             @query-data="queryData"
         />
     </div>
@@ -11,6 +12,27 @@
     import { ref } from 'vue'
     import CommSearch from '@/components/comm-search.vue'
     import { FORM_TYPE } from '@/constants/common'
+
+    const optionsBnForm = ref([
+        { 
+            title: 'demo1', isShow: false, 
+            handleFn: () => {
+                console.log("这里是demo1")
+            }
+        },
+        { 
+            title: 'demo2', isShow: true, 
+            handleFn: () => {
+                console.log("这里是demo2")
+            }
+        },
+        { 
+            title: 'demo3', isShow: () => true, 
+            handleFn: () => {
+                console.log("这里是demo3")
+            }
+        },
+    ])
 
     const optionsForm = ref([
         {

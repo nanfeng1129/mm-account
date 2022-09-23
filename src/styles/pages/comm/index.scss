@@ -2,19 +2,43 @@
     width: 100%;
     height: 100%;
     position: relative;
-    padding: 10px 10px 0px 10px;
+    
+    // padding: 10px 10px 0px 10px;
     // justify-content: center;
     // .search-button{
     //     margin-right: 10px;
     // }
     &-div{
-        padding-right: 20px;
+        // padding-right: 85%;
+        width: 100%;
+        // overflow: hidden;
+        position: relative;
+        &-input{
+            width: 90%!important;
+        }
+        &-select{
+            display: block!important;
+            width: 90%;
+        }
+        &-range{
+            width: 84%!important;
+            // margin-right: 20px;
+            // display: block!important;
+            // padding-right: 20px;
+            // width: 85%;
+        }
+        &-date{
+            width: 84%!important;
+            // padding-right: 20px;
+            // width: 300px!important;
+        }
     }
     &-col{
         width: 100%;
+        // padding-right: 20px;
         overflow: hidden;
         margin-bottom: 10px;
-        display: block;
+        // display: block;
         position: relative;
         &-btn{
             width: 100%;
@@ -27,16 +51,18 @@
                 width: 30%;
             }
         }
-        &-select{
-            display: block!important;
-            // padding-right: 20px;
-            // width: 85%;
-        }
-        &-range{
-            width: 100%!important;
-            // display: block!important;
-            // padding-right: 20px;
-            // width: 85%;
+        
+    }
+    &-optionBn{
+        display: flex;
+        align-items: center;
+        &-item{
+            margin-right: 10px;
         }
     }
 }
+
+// .comm-search /deep/ .el-date-editor{
+//     width: 300px!important;
+// }
+

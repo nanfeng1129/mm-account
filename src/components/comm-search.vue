@@ -13,7 +13,7 @@
                         v-model="formData[item.key]"
                         clearable
                         :placeholder="`请输入${item.title}`"
-                        class="comm-search-col-input"
+                        class="comm-search-div-input"
                     />
 
                     <el-select 
@@ -21,7 +21,7 @@
                         v-model="formData[item.key]"
                         clearable
                         :placeholder="`请输入${item.title}`"
-                        class="comm-search-col-select"
+                        class="comm-search-div-select"
                     >
                         <el-option
                             v-for="item2 in item.resource"
@@ -36,7 +36,7 @@
                         clearable
                         filterable
                         :placeholder="`请输入${item.title}`"
-                        class="comm-search-col-select"
+                        class="comm-search-div-select"
                     >
                         <el-option
                             v-for="item2 in item.resource"
@@ -52,8 +52,7 @@
                         :placeholder="`请选择${item.title}`"
                         :shortcuts="shortcuts"
                         value-format="YYYY-MM-DD"
-                        style="width: 100%"
-                        class="comm-search-col-date"
+                        class="comm-search-div-date"
                     />
 
                     <el-date-picker
@@ -64,7 +63,7 @@
                         start-placeholder="开始日期"
                         end-placeholder="结束日期"
                         value-format="YYYY-MM-DD"
-                        class="comm-search-col-range"
+                        class="comm-search-div-range"
                     />
                 </div>
                 <!-- </el-form-item> -->
@@ -118,6 +117,21 @@
             </el-col>
             
         </el-row>
+        <el-row v-if="optionsBnData && optionsBnData.length > 0">
+            <el-col :span="24" class="comm-search-optionBn">
+                <div v-for="item in optionsBnData">
+                    <el-button
+                        class="comm-search-optionBn-item"
+                        v-if="typeof item.isShow === 'function' ? item.isShow() : item.isShow"
+                        :type="item.bnType ?? 'default'"
+                        @click="item.handleFn"
+                    >
+                        {{item.title}}
+                    </el-button>
+                </div>
+                
+            </el-col>
+        </el-row>
     </div>
 </template>
 
@@ -127,6 +141,7 @@
     import { useDate } from './store' 
     import { ArrowDown, ArrowUp } from '@element-plus/icons-vue'
     import { cloneDeep } from 'lodash'
+    import { EpPropMergeType } from "element-plus/es/utils"
 
     interface OptionResourceType {
         val: string | number | boolean,
@@ -145,6 +160,7 @@
 
     interface optionsBnFormType {
         title: string,
+        bnType?: EpPropMergeType<StringConstructor, "" | "default" | "primary" | "success" | "warning" | "info" | "danger" | "text", unknown>, 
         isShow: boolean | Function,
         handleFn: Function
     }
@@ -163,6 +179,7 @@
 
     const optionsData = ref(cloneDeep(props.optionsForm.slice(0, 2)))
     const formData = reactive<any>({})
+    const optionsBnData = ref(cloneDeep(props.optionsBnForm))
 
     onBeforeMount(() => {
         initFormData()
@@ -197,3 +214,13 @@
     }
 
 </script>
+
+<style scoped>
+/* :deep(.el-date-editor){
+    width: 100%;
+} */
+:deep(.el-input__wrapper){
+    width: 100%;
+}
+
+</style>
