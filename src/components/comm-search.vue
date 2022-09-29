@@ -143,11 +143,12 @@
     import { cloneDeep } from 'lodash'
     import { EpPropMergeType } from "element-plus/es/utils"
 
+    // Vue3 不支持在 withDefaults 中使用外部导入的 interface
+    // 先写在这里，后续转移到 store 文件中
     interface OptionResourceType {
         val: string | number | boolean,
         title: string
     }
-
 
     interface OptionsFormType {
         type: string,
