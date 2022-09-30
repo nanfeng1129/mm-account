@@ -45,6 +45,7 @@ export const useTable = () => {
         {
             prop: 'address',
             label: '地址',
+            showSlot: true
         },
     ]
 

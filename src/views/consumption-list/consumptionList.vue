@@ -9,7 +9,13 @@
             :columns="columns"
             :tableData="tableData"
             :pagination="pagination"
-        />
+        >
+            <template #address="{ index }">
+                <div>
+                    这里是插槽写法{{index}}. 尝试中
+                </div>
+            </template>
+        </CommTable>
     </div>
 </template>
 
