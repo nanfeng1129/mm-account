@@ -7,25 +7,33 @@
             <template #title>
                 <div class="comm-table-title">
                     <div>
-                        <span>记录共计 <span>{{ pagination.total }}</span>条 </span>
+                        <span>记录共计 <span>{{ _pagination.total }}</span>条 </span>
                     </div>
                 </div>
             </template>
         </el-alert>
         <el-table
             :data="_tableData"
+            stripe
         >
-
-            <el-table-column
-            >
-
-            </el-table-column>
+            <!-- <div v-for="item in _columns"> -->
+                <el-table-column
+                    v-for="item in _columns"
+                    :prop="item.prop"
+                    :label="item.label"
+                    :formatter="item.formatter"
+                >
+                    <template v-if="item.showSlot" #default="{ row, column, $index }">
+                        <slot :name="item.prop" :row="row" :column="column" :index="$index"></slot>
+                    </template>
+                </el-table-column>
+            <!-- </div> -->
         </el-table>
         <div class="comm-table-pagination">
             <el-pagination
-                :currentPage="pagination.current"
-                :page-size="pagination.pageSize"
-                :total="pagination.total"
+                :currentPage="_pagination.current"
+                :page-size="_pagination.pageSize"
+                :total="_pagination.total"
                 @current-change="handleCurrentChange"
             />
         </div>
@@ -49,18 +57,21 @@
         width?: string | number,
         fixed?: string | boolean,
         renderHeader?: Function,
+        formatter?: any
     }
 
     interface Props {
         tableData: Array<any>,
         pagination: Pagination,
-        columns: Columns
+        columns: Array<Columns>
     }
 
     const props =  defineProps<Props>()
     const emit = defineEmits(['handleTableChange',])
 
     const _tableData = ref(cloneDeep(props.tableData))
+    const _pagination = ref(cloneDeep(props.pagination))
+    const _columns = ref(cloneDeep(props.columns))
 
     const handleCurrentChange = (val: number) => {
         emit('handleTableChange', val)
