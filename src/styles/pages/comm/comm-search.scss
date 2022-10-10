@@ -49,6 +49,10 @@
             // bottom: 0px;
             &-item{
                 width: 30%;
+                &-span{
+                    display: flex;
+                    align-items: center;
+                }
             }
         }
         

@@ -102,11 +102,11 @@
                         class="comm-search-col-btn-item"
                         @click="changeOptionsData"
                     >
-                        <span v-show="needExpand">
+                        <span v-show="needExpand" class="comm-search-col-btn-item-span">
                             展开
                             <el-icon><ArrowDown /></el-icon>
                         </span>
-                        <span v-show="!needExpand">
+                        <span v-show="!needExpand" class="comm-search-col-btn-item-span">
                             收起
                             <el-icon><ArrowUp /></el-icon>
                         </span>
@@ -118,7 +118,7 @@
             
         </el-row>
         <el-row v-if="optionsBnData && optionsBnData.length > 0">
-            <el-col :span="24" class="comm-search-optionBn">
+            <el-col :span="24" class="comm-search-optionBn comm-search-col">
                 <div v-for="item in optionsBnData">
                     <el-button
                         class="comm-search-optionBn-item"
