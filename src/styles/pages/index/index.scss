@@ -48,10 +48,6 @@
         text-align: center;
         filter: drop-shadow(.75vmax .75vmax .3vmax var(--color-text-second));
     }
-    // @font-face {
-    //     font-family: 'Domaine Display Regular';
-    //     src: url("Domaine-Display-Regular.ttf");
-    // }
 }
 
 
@@ -73,7 +69,6 @@
     left: 920px;
     width: 0px;
     height: 0px;
-    // border: 100px solid;
     border-bottom: 900px solid var(--color-icon-sun-color);
     border-right: 500px solid transparent;
     transform: skewX(56deg);

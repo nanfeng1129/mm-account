@@ -19,7 +19,6 @@
             </div>
             <div class="my-center-container-right">
                 <router-view></router-view>
-                <!-- 这里是右边 -->
             </div>
         </div>
         
