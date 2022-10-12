@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <div class="index-sunshine" v-show="isLight"></div>
+        <div class="index-sunshine"></div>
 
         <div class="index-main">
             <div class="index-main-text animate__animated animate__bounce">
@@ -85,13 +85,21 @@
 </template>
 
 <script lang="ts" setup>
-    import { nextTick, ref } from 'vue'
+    import { nextTick, ref, onBeforeMount } from 'vue'
     import SunIcon from './conponents/SunIcon.vue'
     import MoonIcon from './conponents/MoonIcon.vue'
     import { useModal, useForm } from './store'
     import { User } from '@element-plus/icons-vue'
     import { useRouter } from 'vue-router'
     // const buttonText = ref('深色模式')
+
+    onBeforeMount(() => {
+        let theme = document.documentElement.getAttribute("theme-mode")
+        if(theme === 'dark')
+            isLight.value = false;
+        else
+            isLight.value = true;
+    })
 
     const router = useRouter()
 
