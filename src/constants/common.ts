@@ -15,3 +15,8 @@ export const FORM_TYPE = {
     BTN_SHRINK:'shrink',//按钮组的 展开收起
     TREE_SELECT:'treeSelect', //树形下拉框
 }
+
+export const RESP_TYPE = {
+    SUCCESS: 200,
+    FAILURE: 0
+}
