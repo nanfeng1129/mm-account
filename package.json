@@ -16,12 +16,14 @@
     "aos": "^2.3.4",
     "axios": "^0.27.2",
     "element-plus": "^2.2.16",
+    "qs": "^6.11.0",
     "vue": "^3.2.37",
     "vue-router": "^4.1.5"
   },
   "devDependencies": {
     "@types/aos": "^3.0.4",
     "@types/node": "^18.7.15",
+    "@types/qs": "^6.9.7",
     "@vitejs/plugin-vue": "^3.0.3",
     "cross-env": "^7.0.3",
     "sass": "^1.54.8",
