@@ -56,3 +56,11 @@ export const axiosPostQs = <T> (url: string, data: T, proxy = '/api') => {
     });
 }
 
+export const axiosPostJson = <T> (url: string, data: T, proxy = '/api') => {
+    return axios.post(`${proxy}${url}`, data, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+}
+

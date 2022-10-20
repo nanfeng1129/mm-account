@@ -18,5 +18,5 @@ export const FORM_TYPE = {
 
 export const RESP_TYPE = {
     SUCCESS: 200,
-    FAILURE: 0
+    FAILURE: -1
 }
