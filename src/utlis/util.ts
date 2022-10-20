@@ -51,7 +51,7 @@ export const axiosPostQs = <T> (url: string, data: T, proxy = '/api') => {
     let params = qs.stringify(data);
     return axios.post(`${proxy}${url}`, params, {
         headers: {
-            'content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded'
         }
     });
 }
