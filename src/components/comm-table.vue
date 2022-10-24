@@ -23,7 +23,7 @@
                     :label="item.label"
                     :formatter="item.formatter"
                 >
-                    <template v-if="item.showSlot" #default="{ row, column, $index }">
+                    <template v-if="!!item.showSlot" #default="{ row, column, $index }">
                         <slot :name="item.prop" :row="row" :column="column" :index="$index"></slot>
                     </template>
                 </el-table-column>
