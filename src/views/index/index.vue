@@ -53,11 +53,11 @@
                 label-position="top"
                 :rules="rules"
             >
-                <el-form-item label="账号" prop="userName">
-                    <el-input v-model="formData.userName" autocomplete="off" />
+                <el-form-item label="账号" prop="username">
+                    <el-input v-model="formData.username" autocomplete="off" />
                 </el-form-item>
                 <el-form-item label="密码" prop="password">
-                    <el-input v-model="formData.password" autocomplete="off" />
+                    <el-input v-model="formData.password" autocomplete="off" type="password" show-password />
                 </el-form-item>
                 <el-form-item label="邮箱" prop="email">
                     <el-input v-model="formData.email" autocomplete="off" />
@@ -105,14 +105,14 @@
 
     const { visible, handleOk, changeVisible } = useModal()
 
-    const { formData, rules, loginForm, onSubmit, handleReset } = useForm()
+    const { formData, rules, loginForm, onSubmit, handleReset, isLogin } = useForm()
 
     const login = () => {
-        router.push("/myCenter")
-        // changeVisible(true)
-        // nextTick(() => {
-        //     handleReset(loginForm.value)
-        // })
+        // router.push("/myCenter")
+        changeVisible(true)
+        nextTick(() => {
+            handleReset(loginForm.value)
+        })
     }
 
     const isLight = ref(true)

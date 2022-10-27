@@ -1,11 +1,14 @@
 import { ref, reactive } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
+import { axiosPostJson } from '../../utlis/util'
+import { RESP_TYPE } from '../../constants/common'
+import Message from '../../utlis/message'
 // import 
 
 interface User {
-    userName: string,
+    username: string,
     password: string,
-    email: string
+    email?: string
 }
 
 export const useModal = () => {
@@ -16,7 +19,7 @@ export const useModal = () => {
     }
 
     const handleOk = (el: FormInstance | undefined, data: User, cb: Function) =>{ 
-        cb(el, data)
+        cb(el, data, changeVisible)
     }
 
     return {
@@ -31,14 +34,16 @@ export const useForm = () => {
 
     const loginForm = ref()
 
+    const isLogin = ref(false)
+
     const formData = reactive<User>({
-        userName: '',
+        username: '',
         password: '',
         email: '',
     })
 
     const rules = reactive<FormRules>({
-        userName: [
+        username: [
             { required: true, message: '请输入账号', trigger: 'blur' },
             { pattern: /^\w+$/, message: '请输入正确账号' }
         ],
@@ -46,7 +51,7 @@ export const useForm = () => {
             { required: true, message: '请输入密码', trigger: 'blur' },
             { 
                 validator: (rule: any, value: any, callback: any) => {
-                    if(value.length <= 6){
+                    if(value.length < 6){
                         callback(new Error('请输入正确密码'))
                     }
                     for(let i = 0; i < value.length; i++){
@@ -61,17 +66,26 @@ export const useForm = () => {
             }
         ],
         email: [
-            { required: true, message: '请输入邮箱', trigger: 'blur' },
             { type: 'email', message: '请输入正确邮箱', trigger: 'blur' }
         ],
     })
 
-    const onSubmit = async (formEl: FormInstance | undefined, user: User) => {
+    const onSubmit = async (formEl: FormInstance | undefined, user: User, changeVisible: Function) => {
         console.log("data", user)
         if(!formEl) return;
         await formEl.validate((valid, fields) => {
             if(valid) {
-                console.log('submit!!!')
+                axiosPostJson('/user/login', user).then((res: any) => {
+                    if(res.data.code === RESP_TYPE.SUCCESS){
+                        Message.success("登录成功")
+                        sessionStorage.setItem("token", res.data.data)
+                        changeVisible(false)
+                        isLogin.value = true
+                    }else{
+                        Message.error("登录失败")
+                        isLogin.value = false
+                    }
+                })
             }else{
                 console.log("error Submit", fields)
             }
@@ -89,7 +103,8 @@ export const useForm = () => {
         formData,
         rules,
         onSubmit,
-        handleReset
+        handleReset,
+        isLogin
     }
 
 }
