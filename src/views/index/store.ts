@@ -3,7 +3,6 @@ import type { FormInstance, FormRules } from 'element-plus'
 import { axiosPostJson } from '../../utlis/util'
 import { RESP_TYPE } from '../../constants/common'
 import Message from '../../utlis/message'
-// import 
 
 interface User {
     username: string,
@@ -33,8 +32,6 @@ export const useModal = () => {
 export const useForm = () => {
 
     const loginForm = ref()
-
-    const isLogin = ref(false)
 
     const formData = reactive<User>({
         username: '',
@@ -79,11 +76,10 @@ export const useForm = () => {
                     if(res.data.code === RESP_TYPE.SUCCESS){
                         Message.success("登录成功")
                         sessionStorage.setItem("token", res.data.data)
+
                         changeVisible(false)
-                        isLogin.value = true
                     }else{
                         Message.error("登录失败")
-                        isLogin.value = false
                     }
                 })
             }else{
@@ -104,7 +100,6 @@ export const useForm = () => {
         rules,
         onSubmit,
         handleReset,
-        isLogin
     }
 
 }

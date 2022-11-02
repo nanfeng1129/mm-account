@@ -91,6 +91,7 @@
     import { useModal, useForm } from './store'
     import { User } from '@element-plus/icons-vue'
     import { useRouter } from 'vue-router'
+    import { useLoginStore } from '@/stores/user'
     // const buttonText = ref('深色模式')
 
     onBeforeMount(() => {
@@ -103,9 +104,12 @@
 
     const router = useRouter()
 
+    // pinia
+    const store = useLoginStore()
+
     const { visible, handleOk, changeVisible } = useModal()
 
-    const { formData, rules, loginForm, onSubmit, handleReset, isLogin } = useForm()
+    const { formData, rules, loginForm, onSubmit, handleReset } = useForm()
 
     const login = () => {
         // router.push("/myCenter")
