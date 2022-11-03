@@ -19,8 +19,13 @@
 
             <div class="index-login">
                 <div>
-                    <el-icon size="36px" @click="login">
+                    <el-icon size="36px" @click="login" v-if="!store.isLogin">
                         <User />
+                    </el-icon>
+                    <el-icon size="36px" @click="jumpToMyCenter" v-else>
+                        <el-badge is-dot type="success">
+                            <User />
+                        </el-badge>
                     </el-icon>
                 </div>
             </div>
@@ -113,10 +118,18 @@
 
     const login = () => {
         // router.push("/myCenter")
-        changeVisible(true)
-        nextTick(() => {
-            handleReset(loginForm.value)
-        })
+        if(!store.isLogin) {
+            changeVisible(true)
+            nextTick(() => {
+                handleReset(loginForm.value)
+            })
+        }
+    }
+
+    const jumpToMyCenter = () => {
+        if(store.isLogin) {
+            router.push("/myCenter")
+        }
     }
 
     const isLight = ref(true)

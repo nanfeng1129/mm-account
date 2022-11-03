@@ -3,6 +3,7 @@ import type { FormInstance, FormRules } from 'element-plus'
 import { axiosPostJson } from '../../utlis/util'
 import { RESP_TYPE } from '../../constants/common'
 import Message from '../../utlis/message'
+import { useLoginStore } from '@/stores/user'
 
 interface User {
     username: string,
@@ -68,18 +69,19 @@ export const useForm = () => {
     })
 
     const onSubmit = async (formEl: FormInstance | undefined, user: User, changeVisible: Function) => {
-        console.log("data", user)
         if(!formEl) return;
+        const store = useLoginStore()
         await formEl.validate((valid, fields) => {
             if(valid) {
                 axiosPostJson('/user/login', user).then((res: any) => {
                     if(res.data.code === RESP_TYPE.SUCCESS){
                         Message.success("登录成功")
                         sessionStorage.setItem("token", res.data.data)
-
+                        store.changeIsLogin(true)
                         changeVisible(false)
                     }else{
                         Message.error("登录失败")
+                        store.changeIsLogin(false)
                     }
                 })
             }else{

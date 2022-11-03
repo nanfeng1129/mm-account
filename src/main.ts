@@ -9,11 +9,11 @@ import router from './router'
 import 'animate.css';
 import AOS from 'aos'
 import 'aos/dist/aos.css';
+import { createPinia } from 'pinia'
 
-
+const pinia = createPinia()
 
 AOS.init();
 
-
-createApp(App).use(router).mount('#app')
+createApp(App).use(router).use(pinia).mount('#app')
 
