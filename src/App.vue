@@ -12,9 +12,9 @@
   import zhCn from 'element-plus/lib/locale/lang/zh-cn'
   import { axiosPostJson } from './utlis/util'
   import { RESP_TYPE } from '@/constants/common'
-  import { userStore } from '@/stores/user'
+  import { useLoginStore } from '@/stores/user'
   onMounted(() => {
-
+    const store = useLoginStore()
     document.documentElement.setAttribute('theme-mode', 'light')
     document.documentElement.className = 'light'
     
@@ -34,7 +34,7 @@
     // 验证是否登录
     axiosPostJson('/user/checkLogin').then(res => {
       if (res.data?.code === RESP_TYPE.SUCCESS) {
-        userStore.changeIsLogin(true)
+        store.changeIsLogin(true)
       }
     })
   })
