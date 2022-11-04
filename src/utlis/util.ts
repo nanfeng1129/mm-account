@@ -2,6 +2,10 @@ import axios from 'axios'
 import { RESP_TYPE } from '../constants/common'
 import Message from './message'
 import qs from 'qs'
+import { useLoginStore } from '@/stores/user'
+import router from '@/router'
+
+const store = useLoginStore()
 
 axios.interceptors.request.use(
     ( config ) => {
@@ -14,16 +18,17 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
     ( response ) => {
-        if (response.data?.code === RESP_TYPE.SUCCESS){
-            return response
-        }
-        else if (response.data?.code === RESP_TYPE.FAILURE){
-            Message.error(response.data?.msg)
-            return response
+        if (response.data?.code === RESP_TYPE.LOGIN_EXPIRED) {
+            if (store.isLogin)
+                Message.error(response.data?.msg ?? '未知错误');
+            store.changeIsLogin(false)
+            router.push("/")
+        } else if (response.data?.code === RESP_TYPE.FAILURE){
+            Message.error(response.data?.msg ?? '未知错误')
         } else {
             Message.error('服务器遇到点小问题，请过会再试哦^_^')
-            return response
         }
+        return response
     },
     ( error ) => {
         const { response } = error
@@ -47,7 +52,7 @@ axios.interceptors.response.use(
 )
 
 
-export const axiosPostQs = <T> (url: string, data: T, proxy = '/api') => {
+export const axiosPostQs = (url: string, data = {}, proxy = '/api') => {
     let params = qs.stringify(data);
     return axios.post(`${proxy}${url}`, params, {
         headers: {
@@ -56,7 +61,7 @@ export const axiosPostQs = <T> (url: string, data: T, proxy = '/api') => {
     });
 }
 
-export const axiosPostJson = <T> (url: string, data: T, proxy = '/api') => {
+export const axiosPostJson = (url: string, data = {}, proxy = '/api') => {
     return axios.post(`${proxy}${url}`, data, {
         headers: {
             'Content-Type': 'application/json'
