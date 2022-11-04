@@ -10,5 +10,3 @@ export const useLoginStore = defineStore('login', () => {
     }
     return { isLogin, changeIsLogin }
 })
-
-export const userStore = useLoginStore()

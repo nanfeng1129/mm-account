@@ -5,8 +5,6 @@ import qs from 'qs'
 import { useLoginStore } from '@/stores/user'
 import router from '@/router'
 
-const store = useLoginStore()
-
 axios.interceptors.request.use(
     ( config ) => {
         return config
@@ -18,7 +16,10 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
     ( response ) => {
-        if (response.data?.code === RESP_TYPE.LOGIN_EXPIRED) {
+        const store = useLoginStore()
+        if (response.data?.code === RESP_TYPE.SUCCESS){
+            return response
+        } else if (response.data?.code === RESP_TYPE.LOGIN_EXPIRED) {
             if (store.isLogin)
                 Message.error(response.data?.msg ?? '未知错误');
             store.changeIsLogin(false)
