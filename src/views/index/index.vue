@@ -19,14 +19,28 @@
 
             <div class="index-login">
                 <div>
-                    <el-icon size="36px" @click="login" v-if="!store.isLogin">
-                        <User />
-                    </el-icon>
-                    <el-icon size="36px" @click="jumpToMyCenter" v-else>
+                    <div v-if="!store.isLogin">
+                        <el-icon size="36px" @click="login">
+                            <User />
+                        </el-icon>
+                    </div>
+                    <div v-else>
+                        <el-dropdown>
+                            <el-avatar :src="avatarSrc" fit="cover" />
+                            <template #dropdown>
+                                <el-dropdown-menu>
+                                    <el-dropdown-item @click="jumpToMyCenter">个人中心</el-dropdown-item>
+                                    <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
+                                </el-dropdown-menu>
+                            </template>
+                        </el-dropdown>
+                    </div>
+                    <!-- <el-icon size="36px" @click="jumpToMyCenter" v-else>
+                        <el-avatar :src="avatarSrc" fit="cover" />
                         <el-badge is-dot type="success">
                             <User />
                         </el-badge>
-                    </el-icon>
+                    </el-icon> -->
                 </div>
             </div>
         </div>
@@ -93,7 +107,7 @@
     import { nextTick, ref, onBeforeMount } from 'vue'
     import SunIcon from './conponents/SunIcon.vue'
     import MoonIcon from './conponents/MoonIcon.vue'
-    import { useModal, useForm } from './store'
+    import { useModal, useForm, useAvatar, useAfterLogin } from './store'
     import { User } from '@element-plus/icons-vue'
     import { useRouter } from 'vue-router'
     import { useLoginStore } from '@/stores/user'
@@ -112,9 +126,14 @@
     // pinia
     const store = useLoginStore()
 
+    // modal
     const { visible, handleOk, changeVisible } = useModal()
 
+    // form
     const { formData, rules, loginForm, onSubmit, handleReset } = useForm()
+
+    // avatar
+    const { avatarSrc } = useAvatar()
 
     const login = () => {
         // router.push("/myCenter")
@@ -126,11 +145,8 @@
         }
     }
 
-    const jumpToMyCenter = () => {
-        if(store.isLogin) {
-            router.push("/myCenter")
-        }
-    }
+    // after login
+    const { jumpToMyCenter, logout } = useAfterLogin()
 
     const isLight = ref(true)
 

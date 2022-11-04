@@ -18,5 +18,6 @@ export const FORM_TYPE = {
 
 export const RESP_TYPE = {
     SUCCESS: 200,
-    FAILURE: -1
+    FAILURE: -1,
+    LOGIN_EXPIRED: 10401,
 }

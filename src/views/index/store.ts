@@ -1,9 +1,10 @@
 import { ref, reactive } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
-import { axiosPostJson } from '../../utlis/util'
-import { RESP_TYPE } from '../../constants/common'
-import Message from '../../utlis/message'
+import { axiosPostJson } from '@/utlis/util'
+import { RESP_TYPE } from '@/constants/common'
+import Message from '@/utlis/message'
 import { useLoginStore } from '@/stores/user'
+import router from '@/router'
 
 interface User {
     username: string,
@@ -74,14 +75,11 @@ export const useForm = () => {
         await formEl.validate((valid, fields) => {
             if(valid) {
                 axiosPostJson('/user/login', user).then((res: any) => {
-                    if(res.data.code === RESP_TYPE.SUCCESS){
+                    if(res.data.code === RESP_TYPE.SUCCESS) {
                         Message.success("登录成功")
                         sessionStorage.setItem("token", res.data.data)
                         store.changeIsLogin(true)
                         changeVisible(false)
-                    }else{
-                        Message.error("登录失败")
-                        store.changeIsLogin(false)
                     }
                 })
             }else{
@@ -104,5 +102,37 @@ export const useForm = () => {
         handleReset,
     }
 
+}
+
+export const useAvatar = () => {
+    const avatarSrc = ref('https://i.gtimg.cn/club/item/face/img/2/15922_100.gif')
+
+    return {
+        avatarSrc
+    }
+}
+
+export const useAfterLogin = () => {
+    const store = useLoginStore()
+
+    const jumpToMyCenter = () => {
+        
+        if(store.isLogin) {
+            router.push("/myCenter")
+        }
+    }
+    const logout = () => {
+        axiosPostJson("/user/logout").then(res => {
+            if(res.data?.code === RESP_TYPE.SUCCESS) {
+                Message.success("退出登录成功")
+                store.changeIsLogin(false)
+            }
+        })
+    }
+
+    return {
+        jumpToMyCenter,
+        logout
+    }
 }
 
