@@ -44,7 +44,7 @@
 
     const clickMenu = (item: any) => {
         if(item.children && item.children.length > 0) return;
-        router.push(`${item.meta?.parent ?? ''}/${item.path}`)
+        router.push(`${item.meta?.parent ?? ''}${item.path.indexOf('/') === 0 ? '' : '/'}${item.path}`)
     }
 
 </script>

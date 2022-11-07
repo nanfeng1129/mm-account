@@ -9,7 +9,7 @@
         </div>
         <div class="my-center-container">
             <div class="my-center-container-left">
-                <el-menu>
+                <el-menu class="my-center-container-left-menu">
                     <Menu 
                         v-for="(item, index) in routes[1].children"
                         :_item="item"
