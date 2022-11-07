@@ -14,6 +14,7 @@ export const routes: RouteRecordRaw[] = [
         meta: {
             title: '个人中心',
         },
+        redirect: '/myCenter/consumptionList',
         children: [
             {
                 path: 'consumptionList',
@@ -22,65 +23,25 @@ export const routes: RouteRecordRaw[] = [
                     title: '消费列表',
                     parent: '/myCenter'
                 },
-                children: [
-                    {
-                        path: 'consumptionList',
-                        component: () => import("@/views/consumption-list/consumptionList.vue"),
-                        meta: {
-                            title: '消费列表',
-                            parent: '/myCenter/consumptionList'
-                        },
-                    },
-                    {
-                        path: 'consumptionList',
-                        component: () => import("@/views/consumption-list/consumptionList.vue"),
-                        meta: {
-                            title: '消费列表',
-                            parent: '/myCenter/consumptionList'
-                        },
-                    }
-                ]
+                // children: [
+                //     {
+                //         path: 'consumptionList',
+                //         component: () => import("@/views/consumption-list/consumptionList.vue"),
+                //         meta: {
+                //             title: '消费列表',
+                //             parent: '/myCenter/consumptionList'
+                //         },
+                //     },
+                //     {
+                //         path: 'consumptionList',
+                //         component: () => import("@/views/consumption-list/consumptionList.vue"),
+                //         meta: {
+                //             title: '消费列表',
+                //             parent: '/myCenter/consumptionList'
+                //         },
+                //     }
+                // ]
             },
-            {
-                path: 'consumptionList',
-                component: () => import("@/views/consumption-list/consumptionList.vue"),
-                meta: {
-                    title: '消费列表',
-                    parent: '/myCenter'
-                },
-            },
-            {
-                path: 'consumptionList',
-                component: () => import("@/views/consumption-list/consumptionList.vue"),
-                meta: {
-                    title: '消费列表',
-                    parent: '/myCenter'
-                },
-            },
-            {
-                path: 'consumptionList',
-                component: () => import("@/views/consumption-list/consumptionList.vue"),
-                meta: {
-                    title: '消费列表',
-                    parent: '/myCenter'
-                },
-            },
-            {
-                path: 'consumptionList',
-                component: () => import("@/views/consumption-list/consumptionList.vue"),
-                meta: {
-                    title: '消费列表',
-                    parent: '/myCenter'
-                },
-            },
-            {
-                path: 'consumptionList',
-                component: () => import("@/views/consumption-list/consumptionList.vue"),
-                meta: {
-                    title: '消费列表',
-                    parent: '/myCenter'
-                },
-            }
         ]
     }
 ]

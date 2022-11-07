@@ -73,13 +73,13 @@
                 :rules="rules"
             >
                 <el-form-item label="账号" prop="username">
-                    <el-input v-model="formData.username" autocomplete="off" />
+                    <el-input v-model="formData.username" autocomplete="off" placeholder="请输入账号"/>
                 </el-form-item>
                 <el-form-item label="密码" prop="password">
-                    <el-input v-model="formData.password" autocomplete="off" type="password" show-password />
+                    <el-input v-model="formData.password" autocomplete="off" placeholder="请输入密码" type="password" show-password />
                 </el-form-item>
                 <el-form-item label="邮箱" prop="email">
-                    <el-input v-model="formData.email" autocomplete="off" />
+                    <el-input v-model="formData.email" autocomplete="off" placeholder="请输入邮箱"/>
                 </el-form-item>
             </el-form>
             <template #footer>
@@ -120,8 +120,6 @@
         else
             isLight.value = true;
     })
-
-    const router = useRouter()
 
     // pinia
     const store = useLoginStore()

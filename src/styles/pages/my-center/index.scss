@@ -8,6 +8,9 @@
         display: flex;
         &-left{
             width: 18%;
+            &-menu{
+                height: 100%;
+            }
         }
         &-right{
             width: 82%;
