@@ -10,9 +10,9 @@
         </template>
         <menu-component 
             v-if="menuData.children" 
-            v-for="(menuItem, menuIndex) in menuData.children"
+            v-for="menuItem in menuData.children"
             :_item="menuItem"
-            :_index="`${props._index}-${menuIndex}`"
+            :_index="`${menuItem.meta?.parent ?? ''}${menuItem.path}`"
         />
     </component>
 </template>
