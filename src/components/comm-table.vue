@@ -73,8 +73,8 @@
     const _pagination = ref(cloneDeep(props.pagination))
     const _columns = ref(cloneDeep(props.columns))
 
-    const handleCurrentChange = (val: number) => {
-        emit('handleTableChange', val)
+    const handleCurrentChange = (current: number) => {
+        emit('handleTableChange', current)
     }
 
 </script>
