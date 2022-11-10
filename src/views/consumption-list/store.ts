@@ -69,10 +69,15 @@ export const useTable = () => {
         },
     ]
 
+    const handleTableChange = (current: number) => {
+        pagination.value.current = current
+    }
+
     return {
         tableData,
         pagination,
-        columns
+        columns,
+        handleTableChange
     }
 }
 
@@ -114,18 +119,25 @@ export const useForm = () => {
             { required: true, message: '请输入消费名称', trigger: 'blur' },
         ],
         consumptionNum: [
-            { required: true, message: '请输入消费金额', trigger: 'blur' }
+            { required: true, message: '请输入消费金额', trigger: 'blur' },
+            {
+                validator: (rule: any, value: any, callback: any) => {
+                    if(!(/^[0-9]+$/.test(value))){
+                        callback(new Error('消费金额输入错误'))
+                    }
+                    callback()
+                },
+                trigger: 'blur' 
+            }
         ],
         consumptionCategory: [
-            { required: true, type: 'array', message: '请选择消费类别', trigger: 'blur' },
+            { required: true, message: '请选择消费类别', trigger: 'blur' },
             { 
                 validator: (rule: any, value: any, callback: any) => {
-                    console.log("会走到这边来嘛")
                     if(value.length > 3){
                         callback(new Error('选择的类别不能超过三个'))
                     }
                     callback()
-                    // else if(/^[\u0000-\u00ff]$/.test(val))
                 }, 
                 trigger: 'blur' 
             }
@@ -166,5 +178,48 @@ export const useForm = () => {
         handleReset,
     }
 
+}
+
+export const useDateTime = () => {
+    const shortcuts = [
+        {
+            text: 'Today',
+            value: new Date(),
+        },
+        {
+            text: 'Yesterday',
+            value: () => {
+                const date = new Date()
+                date.setTime(date.getTime() - 3600 * 1000 * 24)
+                return date
+            },
+        },
+        {
+            text: 'A week ago',
+            value: () => {
+                const date = new Date()
+                date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
+                return date
+            },
+        },
+    ]
+
+    return {
+        shortcuts
+    }
+}
+
+export const demo11 = () => {
+    const pagination = ref({
+        current: 1,
+    })
+    const handleChange = (current: number) => {
+        pagination.value.current = current
+    }
+
+    return {
+        pagination,
+        handleChange
+    }
 }
 

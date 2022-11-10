@@ -9,6 +9,7 @@
             :columns="columns"
             :tableData="tableData"
             :pagination="pagination"
+            @handle-table-change="handleTableChange"
         >
             <template #address="{ index }">
                 <div>
@@ -25,18 +26,18 @@
                 :rules="rules"
             >
                 <el-form-item label="消费名称" prop="consumptionName">
-                    <el-input v-model="formData.consumptionName" autocomplete="off" />
+                    <el-input v-model="formData.consumptionName" autocomplete="off" placeholder="请输入消费名称"/>
                 </el-form-item>
                 <el-form-item label="消费金额" prop="consumptionNum">
-                    <el-input v-model="formData.consumptionNum" autocomplete="off" />
+                    <el-input v-model="formData.consumptionNum" autocomplete="off" placeholder="请输入消费金额"/>
                 </el-form-item>
                 <el-form-item label="消费类别" prop="consumptionCategory">
                     <el-select
                         v-model="formData.consumptionCategory"
                         multiple
-                        placeholder="Select"
-                        style="width: 240px"
+                        placeholder="请选择消费类别"
                         autocomplete="off"
+                        style="width: 100%"
                         @change="showValue"
                     >
                         <el-option
@@ -48,10 +49,16 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item label="消费时间" prop="consumptionTime">
-                    <el-input v-model="formData.consumptionTime" autocomplete="off" type="password" show-password />
+                    <el-date-picker
+                        v-model="formData.consumptionTime"
+                        type="datetime"
+                        placeholder="请选择消费时间"
+                        :shortcuts="shortcuts"
+                    />
+                    <!-- <el-input v-model="formData.consumptionTime" autocomplete="off" placeholder="请选择消费时间"/> -->
                 </el-form-item>
                 <el-form-item label="消费备注" prop="consumptionRemark">
-                    <el-input v-model="formData.consumptionRemark" autocomplete="off" />
+                    <el-input v-model="formData.consumptionRemark" autocomplete="off" placeholder="请输入消费备注"/>
                 </el-form-item>
             </el-form>
             <template #footer>
@@ -69,7 +76,7 @@
     import CommSearch from '@/components/comm-search.vue'
     import { FORM_TYPE } from '@/constants/common'
     import CommTable from '@/components/comm-table.vue'
-    import { useTable, useDialog, useForm } from './store'
+    import { useTable, useDialog, useForm, useDateTime } from './store'
 
     // comm-search buttons
     const optionsBnForm = ref([
@@ -144,13 +151,16 @@
     }
 
     // table
-    const { columns, pagination, tableData } = useTable()
+    const { columns, pagination, tableData, handleTableChange } = useTable()
 
     // dialog
     const { visible, handleOk, changeVisible } = useDialog()
 
     // form
     const { formData, rules, handleReset, onSubmit, consumptionForm } = useForm()
+
+    // date-time
+    const { shortcuts } = useDateTime()
 
     const showValue = (val: any) => {
         console.log("多选返回的值是什么呢", val)
